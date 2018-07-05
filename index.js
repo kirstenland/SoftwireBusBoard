@@ -3,7 +3,10 @@ const readlineSync = require("readline-sync");
 
 const getCoords = require("./get-coords");
 
-getCoords("OX1 4AU").then(console.log);
+const getStops = require("./tfl-api/get-stops");
+
+getCoords("OX1 4AU").then(
+    location => getStops(location).then(console.log));
 
 //const stopCode = readlineSync.question("Enter a stop code:");
 /*
