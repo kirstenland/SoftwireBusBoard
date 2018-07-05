@@ -1,7 +1,12 @@
-const request = require("request");
+const request = require("request-promise-native");
 const readlineSync = require("readline-sync");
 
-const stopCode = readlineSync.question("Enter a stop code:");
+const getCoords = require("./get-coords");
+
+getCoords("OX1 4AU").then(console.log);
+
+//const stopCode = readlineSync.question("Enter a stop code:");
+/*
 request(`https://api.tfl.gov.uk/StopPoint/${stopCode}/arrivals`, function(error, response, body) {
     let buses = JSON.parse(body);
     buses.sort(function(bus1, bus2) {
@@ -11,3 +16,4 @@ request(`https://api.tfl.gov.uk/StopPoint/${stopCode}/arrivals`, function(error,
         console.log(`${bus.lineName} ${(bus.timeToStation/60).toFixed(0)} minutes away`)
     );
 })
+*/
