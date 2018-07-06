@@ -6,6 +6,8 @@ const getStops = require("./tfl-api/get-stops");
 const express = require('express')
 const app = express()
 
+const portNumber = 3000;
+
 app.use(express.static('frontend'));
 
 app.get('/departureBoards/:postcode', function(req, res) {
@@ -23,4 +25,5 @@ app.get('/departureBoards/:postcode', function(req, res) {
         });
 })
 
-app.listen(3000)
+app.listen(portNumber)
+console.log(`Listening to port ${portNumber}`);

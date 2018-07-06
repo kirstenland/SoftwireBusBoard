@@ -1,9 +1,12 @@
 function getData(postcode) {
-    $.get("/departureBoards/"+postcode, renderData);
+    $.ajax({url: "/departureBoards/"+postcode,
+            success: renderData,
+            error: renderError});
 }
 
 function renderData(data) {
-    var resultsDiv = $("#results");
+    $("#errors").hide();
+    var resultsDiv = $("#results").show();
     var header = $("<h2>").text("Results:")
     var stops = data.map(function(stop) {
         
@@ -17,6 +20,14 @@ function renderData(data) {
         return $("<spand>").append(subheader).append(list);
     });
     resultsDiv.html(header).append(stops);
+}
+
+function renderError(xhr) {
+    console.log(xhr);
+    var errorBox = $("#errors");
+    errorBox.show();
+    errorBox.html(xhr.responseText);
+    $("#results").hide();
 }
 
 $().ready(function() {
