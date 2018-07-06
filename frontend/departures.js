@@ -31,8 +31,9 @@ function renderError(xhr) {
 }
 
 $().ready(function() {
-    $("#submit").click(function() {
+    $("#postcode_form").submit(function(event) {
         getData($("#postcode").val())
+        event.preventDefault();
     })
 }
 )
