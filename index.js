@@ -9,4 +9,5 @@ getCoords(postcode) //NW5 1TL
 .then(getStops)
 .then(stops => stops.splice(0,2))
 .then(stops => Promise.all(stops.map(stop=>stop.getArrivals())))
-.then(stops => stops.forEach((stop) => stop.prettyPrint()));
+.then(stops => stops.forEach((stop) => stop.prettyPrint()))
+.catch(console.log)

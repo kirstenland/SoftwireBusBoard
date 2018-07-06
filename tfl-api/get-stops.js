@@ -8,7 +8,9 @@ function getStops(location, radius) {
             lon: location.longitude,
             stopTypes: "NaptanPublicBusCoachTram"
         }
-    return tflApi.apiCall("/StopPoint", request_options).then(response => response.stopPoints.map(stopPoint => new BusStop(stopPoint)));
+    return tflApi.apiCall("/StopPoint", request_options)
+    .then(response => response.stopPoints.map(stopPoint => new BusStop(stopPoint)))
+    .then(stopPoints => {if (stopPoints.length === 0) throw new Error(`No stops found at given location`); return buses;});
 }
 
 module.exports = getStops;

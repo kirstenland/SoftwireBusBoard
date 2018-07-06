@@ -15,7 +15,7 @@ class TflApi {
             qs: Object.assign(options, this.API_KEYS),
             json:true
         }
-        return request(request_options)
+        return request(request_options).catch(error => {throw new Error(console.error(`TFL api error (${error})`))})
 
     }
 }
