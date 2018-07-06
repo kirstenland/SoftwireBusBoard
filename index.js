@@ -2,11 +2,13 @@ const request = require("request-promise-native");
 const readlineSync = require("readline-sync");
 
 const getCoords = require("./get-coords");
+const getBuses = require("./tfl-api/get-buses");
 
 const getStops = require("./tfl-api/get-stops");
 
-getCoords("NW5 1TL").then(
-    location => getStops(location)).then(console.log);
+getCoords("NW5 1TL").then(getStops).then((stops) => {
+    stops.forEach(getBuses)
+});
 
 //const stopCode = readlineSync.question("Enter a stop code:");
 /*
