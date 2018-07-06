@@ -7,7 +7,10 @@ const getBuses = require("./tfl-api/get-buses");
 const getStops = require("./tfl-api/get-stops");
 
 getCoords("NW5 1TL").then(getStops).then((stops) => {
-    stops.forEach(getBuses)
+    stops.forEach((stop) => {
+        console.log(stop.toString());
+        getBuses(stop).then(console.log);
+    } )
 });
 
 //const stopCode = readlineSync.question("Enter a stop code:");

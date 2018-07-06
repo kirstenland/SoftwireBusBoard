@@ -1,6 +1,6 @@
 class BusStop {
     constructor(api_response) {
-        this.id = api_response.id,
+        this.id = api_response.naptanId,
         this.commonName = api_response.commonName
     }
     toString() {
