@@ -1,10 +1,5 @@
-const request = require("request-promise-native");
 const tflApi = require("./Tfl-api");
-
 const BusStop = require("../Classes/BusStop")
-
-const API_KEYS  =require("../api_keys");
-const TFL_API ="https://api.tfl.gov.uk";
 
 function getStops(location, radius) {
     request_options = {
