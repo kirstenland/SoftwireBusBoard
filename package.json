@@ -18,6 +18,7 @@
   "homepage": "https://github.com/kirstenland/SoftwireBusBoard#readme",
   "dependencies": {
     "chalk": "^2.4.1",
+    "express": "^4.16.3",
     "readline-sync": "^1.4.9",
     "request": "^2.87.0",
     "request-promise-native": "^1.0.5"

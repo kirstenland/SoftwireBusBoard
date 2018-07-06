@@ -3,11 +3,26 @@ const readlineSync = require("readline-sync");
 const getCoords = require("./get-coords");
 const getStops = require("./tfl-api/get-stops");
 
-let postcode = readlineSync.question("Postcode: ")
+const express = require('express')
+const app = express()
 
-getCoords(postcode) //NW5 1TL
-.then(getStops)
-.then(stops => stops.splice(0,2))
-.then(stops => Promise.all(stops.map(stop=>stop.getArrivals())))
-.then(stops => stops.forEach((stop) => stop.prettyPrint()))
-.catch(console.log)
+app.get('/', function (req, res) {
+    res.send('Hello World')
+})
+
+app.get('/departureBoards/:postcode', function(req, res) {
+    let postcode = req.params.postcode;
+
+    getCoords(postcode) //NW5 1TL
+        .then(getStops)
+        .then(stops => stops.splice(0,2))
+        .then(stops => Promise.all(stops.map(stop=>stop.getArrivals())))
+        .then(stops => res.send(stops))
+        .catch(error => {
+            console.log(error);
+            res.status(500);
+            res.send(error.message);
+        });
+})
+
+app.listen(3000)
