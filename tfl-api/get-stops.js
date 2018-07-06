@@ -10,7 +10,7 @@ function getStops(location, radius) {
         }
     return tflApi.apiCall("/StopPoint", request_options)
     .then(response => response.stopPoints.map(stopPoint => new BusStop(stopPoint)))
-    .then(stopPoints => {if (stopPoints.length === 0) throw new Error(`No stops found at given location`); return buses;});
+    .then(stopPoints => {if (stopPoints.length === 0) throw new Error(`No stops found at given location`); return stopPoints;});
 }
 
 module.exports = getStops;
