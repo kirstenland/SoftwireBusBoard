@@ -1,0 +1,17 @@
+h1 {
+    color: deeppink;
+    font-family: cursive;
+}
+
+h2 {
+    font-family: sans-serif;
+}
+
+li {
+    color: darkblue;
+    list-style-type: none;
+}
+
+button {
+    border: 2px solid black;
+}
