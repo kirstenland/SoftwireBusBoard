@@ -6,9 +6,7 @@ const getStops = require("./tfl-api/get-stops");
 const express = require('express')
 const app = express()
 
-app.get('/', function (req, res) {
-    res.send('Hello World')
-})
+app.use(express.static('frontend'));
 
 app.get('/departureBoards/:postcode', function(req, res) {
     let postcode = req.params.postcode;
