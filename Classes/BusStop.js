@@ -1,5 +1,4 @@
 const chalk = require("chalk");
-const getBuses = require("../tfl-api/get-buses");
 
 class BusStop {
     constructor(api_response) {
@@ -8,11 +7,6 @@ class BusStop {
     }
     toString() {
         return `STOP ${this.commonName}`
-    }
-    getArrivals() {
-        return getBuses(this)
-        .then(buses=>this.buses = buses.sort((a,b)=> a.timeToStation - b.timeToStation).splice(0,5))
-        .then(()=>this);
     }
     prettyPrint() {
         console.log(chalk.green(this.toString()+":"));

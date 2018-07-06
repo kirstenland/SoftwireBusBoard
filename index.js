@@ -1,7 +1,7 @@
 const readlineSync = require("readline-sync");
 
 const getCoords = require("./get-coords");
-const getStops = require("./tfl-api/get-stops");
+const tflApi = require("./tfl-api/Tfl-api");
 
 const express = require('express')
 const app = express()
@@ -14,9 +14,9 @@ app.get('/departureBoards/:postcode', function(req, res) {
     let postcode = req.params.postcode;
 
     getCoords(postcode) //NW5 1TL
-        .then(getStops)
+        .then(tflApi.getStops)
         .then(stops => stops.splice(0,2))
-        .then(stops => Promise.all(stops.map(stop=>stop.getArrivals())))
+        .then(stops => Promise.all(stops.map(tflApi.getArrivals)))
         .then(stops => res.send(stops))
         .catch(error => {
             console.log(error);
