@@ -20,6 +20,17 @@ class BusStop {
             console.log("  "+bus.toString());
         }
     }
+    getArrivals() {
+        return getBuses(this)
+        .then(buses=>this.buses = buses.sort((a,b)=> a.timeToStation - b.timeToStation).splice(0,5))
+        .then(()=>this);
+    }
+    prettyPrint() {
+        console.log(chalk.green(this.toString()+":"));
+        for (let bus of this.buses) {
+            console.log("  "+bus.toString());
+        }
+    }
 }
 
 module.exports = BusStop;
