@@ -1,0 +1,44 @@
+body {
+    background-color: darkgoldenrod;
+    color: white;
+    overflow: hidden;
+}
+
+body.good {
+    background-color: darkgreen;
+}
+
+body.bad {
+    background-color: darkred;
+}
+
+#center {
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
+    font-size: 13em;
+}
+#top {
+    position: absolute;
+    left: 50%;
+    top: 0%;
+    transform: translate(-50%);
+    font-size: 1.5em;
+}
+
+#bottom {
+    position: absolute;
+    left: 50%;
+    bottom: 0%;
+    transform: translate(-50%);
+    z-index: -1;
+    color: white;
+    opacity: 0.4;
+    width: 100%;
+    font-family: Arial, Helvetica, sans-serif;
+    text-align: left;
+}
+br {
+    line-height: 150%;
+}

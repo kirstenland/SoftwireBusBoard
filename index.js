@@ -24,6 +24,15 @@ app.get('/departureBoards/:postcode', function(req, res) {
             res.send(error.message);
         });
 })
+app.get('/tubeDisruptions', function(req, res) {
+    tflApi.getModeDisruption("tube")
+        .then(disruptions => res.send(disruptions))
+        .catch(error => {
+            console.log(error);
+            res.status(500);
+            res.send(error.message);
+        })
+});
 
 app.listen(portNumber)
 console.log(`Listening to port ${portNumber}`);

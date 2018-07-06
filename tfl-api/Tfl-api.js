@@ -50,7 +50,11 @@ class TflApi {
         .then(buses => buses.sort((a,b)=> a.timeToStation - b.timeToStation).splice(0,5))
         .then(buses => busStop.buses = buses)
         .then(()=>busStop);
-    };
+    }
+
+    getModeDisruption(mode) {
+        return this.apiCall(`/Line/Mode/${mode}/Disruption`).then(disruptions=>disruptions.map(disruption=>disruption.description));
+    }
 }
 
 module.exports = new TflApi;
