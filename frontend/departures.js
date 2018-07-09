@@ -17,10 +17,18 @@ function renderStop(stop) {
     var list =$("<ul>")
     for (var i = 0; i < stop.buses.length; ++i) {
         var bus = stop.buses[i];
-        var label = bus.lineName + " to " + bus.destinationName + " arriving in " + (bus.timeToStation/60).toFixed(0) + " minutes";
+        var label = bus.lineName + " to " + bus.destinationName + " arriving in " + renderTimeToBus(bus.timeToStation);
         list.append($("<li>").text(label))
     }
     return $("<spand>").append(subheader).append(list);
+}
+
+function renderTimeToBus(time) {
+    if (time > 60) {
+        return (time/60).toFixed(0) + " minutes";
+    } else {
+        return time + " seconds";
+    }
 }
 
 function renderError(xhr) {
