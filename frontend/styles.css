@@ -12,3 +12,14 @@ body {
     font-weight: bold;
     border-radius: 3px;
 }
+
+h1 {
+    font-family: "Comic Sans MS";
+}
+
+a {
+    color: #009;
+}
+a:hover {
+    color: #00F;
+}
