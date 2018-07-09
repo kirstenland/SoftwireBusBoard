@@ -28,7 +28,8 @@ function renderStop(stop) {
             .addClass("fa-li")
             .append($("<i>")
             .addClass(["fas", "fa-bus-alt"]));
-        var label = "<span class=\"bus\">" + bus.lineName + "</span>"
+        var label = "<a class=\"bus\" href=\"/bus/"+bus.lineName+"\">"
+            + bus.lineName + "</a>"
             + " to " + bus.destinationName
             + " arriving in " + renderTimeToBus(bus.timeToStation);
         list.append($("<li>").append(busIcon).append(label))

@@ -11,6 +11,12 @@ body {
     font-size: 75%;
     font-weight: bold;
     border-radius: 3px;
+    text-decoration: none;
+}
+
+.bus:hover {
+    background-color: #f00;
+    color: white;
 }
 
 h1 {

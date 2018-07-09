@@ -9,6 +9,7 @@ const app = express()
 const portNumber = 3000;
 
 app.use(express.static('frontend'));
+app.use('/bus/:line', express.static('frontend/bus.html'));
 
 app.get('/departureBoards/:postcode', function(req, res) {
     let postcode = req.params.postcode;
@@ -31,8 +32,18 @@ app.get('/tubeDisruptions', function(req, res) {
             console.log(error);
             res.status(500);
             res.send(error.message);
-        })
+        });
 });
+
+app.get('/api/bus/:number', function(req, res) {
+    tflApi.getStopesOnRoute(req.params.number)
+        .then(route => res.send(route))
+        .catch(error => {
+            console.log(error);
+            res.status(500);
+            res.send(error.message);
+        });
+})
 
 app.listen(portNumber)
 console.log(`Listening to port ${portNumber}`);

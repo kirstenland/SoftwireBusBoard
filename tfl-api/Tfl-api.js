@@ -53,7 +53,14 @@ class TflApi {
     }
 
     getModeDisruption(mode) {
-        return this.apiCall(`/Line/Mode/${mode}/Disruption`).then(disruptions=>disruptions.map(disruption=>disruption.description));
+        return this.apiCall(`/Line/Mode/${mode}/Disruption`)
+        .then(disruptions=>disruptions.map(disruption=>disruption.description));
+    }
+    getStopesOnRoute(line) {
+        return this.apiCall(`/Line/${line}/Route/Sequence/inbound`)
+        .then(r => {console.log(r); return r})
+        .then(response => response.stations)
+        .then(stations => stations.map(station => station.name))
     }
 }
 
