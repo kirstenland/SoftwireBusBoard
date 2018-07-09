@@ -4,12 +4,14 @@ var state = {
 
 
 function getData(postcode) {
+    spinner.show();
     $.ajax({url: "/departureBoards/"+postcode,
             success: renderData,
             error: renderError});
 }
 
 function renderData(data) {
+    spinner.hide();
     $("#errors").hide();
     var resultsDiv = $("#results").show();
     var header = $("<h2>").text("Results:")
@@ -19,13 +21,19 @@ function renderData(data) {
 
 function renderStop(stop) {
     var subheader =$("<h3>").text(stop.commonName)
-    var list =$("<ul>")
+    var list =$("<ul>").addClass("fa-ul");
     for (var i = 0; i < stop.buses.length; ++i) {
         var bus = stop.buses[i];
-        var label = bus.lineName + " to " + bus.destinationName + " arriving in " + renderTimeToBus(bus.timeToStation);
-        list.append($("<li>").text(label))
+        var busIcon =$("<span>")
+            .addClass("fa-li")
+            .append($("<i>")
+            .addClass(["fas", "fa-bus-alt"]));
+        var label = "<span class=\"bus\">" + bus.lineName + "</span>"
+            + " to " + bus.destinationName
+            + " arriving in " + renderTimeToBus(bus.timeToStation);
+        list.append($("<li>").append(busIcon).append(label))
     }
-    return $("<spand>").append(subheader).append(list);
+    return $("<span>").append(subheader).append(list);
 }
 
 function renderTimeToBus(time) {
@@ -37,6 +45,7 @@ function renderTimeToBus(time) {
 }
 
 function renderError(xhr) {
+    spinner.hide();
     var errorBox = $("#errors");
     errorBox.show();
     errorBox.html(xhr.responseText);
@@ -54,6 +63,15 @@ function updateState() {
 
 function storeState() {
     window.localStorage.setItem("postcode", state.postcode);
+}
+
+var spinner = {
+    show: function() {
+        $("#spinner").show();
+    },
+    hide: function() {
+        $("#spinner").hide();
+    }
 }
 
 
