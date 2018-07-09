@@ -1,3 +1,8 @@
+var state = {
+    postcode: ""
+}
+
+
 function getData(postcode) {
     $.ajax({url: "/departureBoards/"+postcode,
             success: renderData,
@@ -38,21 +43,27 @@ function renderError(xhr) {
     $("#results").hide();
 }
 
-function retriveStoredPostcode() {
-    var storedValue = window.localStorage.getItem("postcode")  || "NW5 1TL";
-    $("#postcode").val(storedValue);
+function loadState() {
+    state.postcode = window.localStorage.getItem("postcode")  || "NW5 1TL";
+    $("#postcode").val(state.postcode);
 }
 
-function storePostcode() {
-    window.localStorage.setItem("postcode", $("#postcode").val());
+function updateState() {
+    state.postcode = $("#postcode").val();
 }
+
+function storeState() {
+    window.localStorage.setItem("postcode", state.postcode);
+}
+
 
 $().ready(function() {
-    retriveStoredPostcode();
+    loadState();
     $("#postcode_form").submit(function(event) {
-        storePostcode();
-        getData($("#postcode").val())
-        event.preventDefault();
+        updateState();
+        storeState();
+        getData(state.postcode);
     });
-    getData($("#postcode").val());
+    setInterval(function() {getData(state.postcode)}, 30*1000);
+    getData(state.postcode);
 })
