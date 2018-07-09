@@ -31,10 +31,24 @@ function renderError(xhr) {
     $("#results").hide();
 }
 
+function retriveStoredPostcode() {
+    var storedValue = window.localStorage.getItem("postcode")  || "NW5 1TL"
+    console.log(storedValue);
+    $("#postcode").val(storedValue);
+}
+
+function storePostcode() {
+    window.localStorage.setItem("postcode", $("#postcode").val());
+}
+
 $().ready(function() {
+    console.log($("#postcode_form").val());
+    retriveStoredPostcode();
+    console.log($("#postcode_form").val());
     $("#postcode_form").submit(function(event) {
+        storePostcode();
         getData($("#postcode").val())
         event.preventDefault();
-    })
-}
-)
+    });
+    getData($("#postcode").val());
+})
