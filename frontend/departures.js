@@ -32,7 +32,6 @@ function renderTimeToBus(time) {
 }
 
 function renderError(xhr) {
-    console.log(xhr);
     var errorBox = $("#errors");
     errorBox.show();
     errorBox.html(xhr.responseText);
@@ -40,8 +39,7 @@ function renderError(xhr) {
 }
 
 function retriveStoredPostcode() {
-    var storedValue = window.localStorage.getItem("postcode")  || "NW5 1TL"
-    console.log(storedValue);
+    var storedValue = window.localStorage.getItem("postcode")  || "NW5 1TL";
     $("#postcode").val(storedValue);
 }
 
@@ -50,9 +48,7 @@ function storePostcode() {
 }
 
 $().ready(function() {
-    console.log($("#postcode_form").val());
     retriveStoredPostcode();
-    console.log($("#postcode_form").val());
     $("#postcode_form").submit(function(event) {
         storePostcode();
         getData($("#postcode").val())
